@@ -607,13 +607,13 @@ font-family: 'Herkules', Arial, sans-serif;
         resetTimer();
         const level = levelsAll[levelIndex];
         boardSize = level.board.length;
-        let cellSize = window.innerWidth < 480 ? 40 : 50;
-        let gap = 2;
-        board.style.gridTemplateColumns = `repeat(${boardSize}, ${cellSize}px)`;
-        board.style.gridTemplateRows = `repeat(${boardSize}, ${cellSize}px)`;
-        board.style.width = boardSize * cellSize + (boardSize - 1) * gap + "px";
-        board.style.height =
-          boardSize * cellSize + (boardSize - 1) * gap + "px";
+        const boardDimension = window.innerWidth < 480 ? 300 : 400;
+const gap = 2;
+const cellSize = (boardDimension - (boardSize - 1) * gap) / boardSize;
+board.style.width = boardDimension + "px";
+board.style.height = boardDimension + "px";
+board.style.gridTemplateColumns = `repeat(${boardSize}, ${cellSize}px)`;
+board.style.gridTemplateRows = `repeat(${boardSize}, ${cellSize}px)`;
 
         let regionKeys = Object.keys(level.regionColors).sort((a, b) => a - b);
         let offset = levelIndex % regionKeys.length;
